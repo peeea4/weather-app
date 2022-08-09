@@ -1,1 +1,3 @@
-export const Header = () => <div>Header</div>;
+import { HeaderWrapper } from "./styled";
+
+export const Header = () => <HeaderWrapper>Header</HeaderWrapper>;

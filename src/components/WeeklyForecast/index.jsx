@@ -1,1 +1,3 @@
-export const WeeklyForecast = () => <div>WeeklyForecast</div>;
+import { WeeklyForecastWrapper } from "./styled";
+
+export const WeeklyForecast = () => <WeeklyForecastWrapper>WeeklyForecast</WeeklyForecastWrapper>;

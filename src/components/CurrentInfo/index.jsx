@@ -1,1 +1,5 @@
-export const CurrentInfo = () => <div>CurrentInfo</div>;
+import { CurrentInfoWrapper } from "./styled";
+
+export const CurrentInfo = () => (
+    <CurrentInfoWrapper>CurrentInfo</CurrentInfoWrapper>
+);
