@@ -1,11 +1,16 @@
-import { GET_FORECAST } from "@/constants/actions";
+import { SET_FORECAST } from "@/constants/actions";
 
-const defaultState = {};
+const defaultState = {
+    weather: {},
+};
 
 export const weatherReducer = (state = defaultState, action) => {
     switch (action.type) {
-        case GET_FORECAST:
-            return {};
+        case SET_FORECAST:
+            return {
+                ...state,
+                weather: action.payload,
+            };
         default:
             return state;
     }
