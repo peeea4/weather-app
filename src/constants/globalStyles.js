@@ -1,13 +1,19 @@
 import { createGlobalStyle } from "styled-components";
 
+import { FONT_COLOR } from "./styles";
+
 export const GlobalStyles = createGlobalStyle`
+
 * {
+
     margin: 0;
     padding: 0;
 
     box-sizing: border-box;
     
-    font-family: Helvetica;
+    font-family: Dosis, sans-serif;
+
+    color: ${FONT_COLOR.primary};
 }
 
 html, body {
@@ -26,5 +32,10 @@ body {
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
+}
+
+h1 {
+    padding: 0;
+    margin: 0;
 }
 `;

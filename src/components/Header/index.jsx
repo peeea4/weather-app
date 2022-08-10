@@ -1,18 +1,10 @@
-import { useDispatch } from "react-redux";
-
-import { fetchWeatherAction } from "@/actions/weather";
-
+import { SearchLocation } from "../SearchLocation";
+import { SelectAPI } from "../SelectAPI";
 import { HeaderWrapper } from "./styled";
 
-export const Header = () => {
-    const dispath = useDispatch();
-    return (
-        <HeaderWrapper>
-            <button
-                onClick={() => {
-                    dispath(fetchWeatherAction());
-                }}
-            >click me</button>
-        </HeaderWrapper>
-    );
-};
+export const Header = ({ coordinates }) => (
+    <HeaderWrapper>
+        <SearchLocation coordinates={coordinates} />
+        <SelectAPI />
+    </HeaderWrapper>
+);
