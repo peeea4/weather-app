@@ -1,9 +1,10 @@
-import { useSelector } from "react-redux/es/exports";
+import { CurrentDate } from "@/components/CurrentDate";
+import { CurrentInfoWrapper } from "@/components/CurrentInfo/styled";
+import { Location } from "@/components/Location";
 
-import { CurrentInfoWrapper } from "./styled";
-
-export const CurrentInfo = () => {
-    const weather = useSelector((state) => state.weather.weather);
-    console.log(weather);
-    return <CurrentInfoWrapper>CurrentInfo</CurrentInfoWrapper>;
-};
+export const CurrentInfo = () => (
+    <CurrentInfoWrapper>
+        <CurrentDate />
+        <Location />
+    </CurrentInfoWrapper>
+);

@@ -1,1 +1,3 @@
-export const EventList = () => <div>EventList</div>;
+import { EventListWrapper } from "./styled";
+
+export const EventList = () => <EventListWrapper></EventListWrapper>;

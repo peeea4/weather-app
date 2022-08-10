@@ -4,10 +4,12 @@ import { call, put, takeEvery } from "redux-saga/effects";
 import { setWeather } from "@/actions/weather";
 import { GET_FORECAST } from "@/constants/actions";
 
-const fetchWeatherFromApi = (coords) => axios.get(
-    `https://api.openweathermap.org/data/2.5/weather?lat=${
+export const fetchWeatherFromApi = (coords) => axios.get(
+    `https://api.openweathermap.org/data/2.5/forecast?lat=${
         coords.latitude
-    }&lon=${coords.longitude}&appid=${"c75a2e7ac927f44818a689ec31f36fd5"}`,
+    }&lon=${
+        coords.longitude
+    }&appid=${"c75a2e7ac927f44818a689ec31f36fd5"}&units=metric`,
 );
 
 export function* fetchWeatherWorker({ payload: coords }) {
