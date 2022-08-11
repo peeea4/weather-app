@@ -1,3 +1,5 @@
+import { WEATHER_ICONS } from "@/constants/weatherIcons";
+
 import {
     DailyForecastWrapper, Day, Image, Temperature,
 } from "./styled";
@@ -16,10 +18,17 @@ export const DailyForecast = ({ day }) => {
     const temp = `${Math.round(day.main.temp)}°`;
     const dayOfWeek = days[new Date(day.dt_txt).getDay()];
 
+    const time = days[new Date(day.dt_txt).getHours()];
+    const iconName = `${day?.weather[0].main.toLowerCase()}${
+        time <= 5 && time <= 22 ? "Night" : "Day"
+    }`;
+
+    const icon = WEATHER_ICONS[iconName];
+
     return (
         <DailyForecastWrapper>
             <Day>{dayOfWeek}</Day>
-            <Image />
+            <Image src={icon} />
             <Temperature>{temp}</Temperature>
         </DailyForecastWrapper>
     );

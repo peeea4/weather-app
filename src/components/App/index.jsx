@@ -15,16 +15,17 @@ import { GlobalStyles } from "@/constants/globalStyles";
 import { useLocation } from "@/hooks/useLocation";
 
 export const App = () => {
-    const [backgroundImage, setBackgroundImage] = useState();
-    const [backgroundColor, setBackgroundColor] = useState();
+    const currentDate = new Date().getHours();
+    const backgroundImageTime =
+        currentDate <= 5 && currentDate <= 22 ? "night" : "day";
     const { getLocation, coordinates } = useLocation();
     useEffect(() => {
         getLocation();
     }, []);
     return (
-        <BackgroundWrapper backgroundColor={backgroundColor}>
+        <BackgroundWrapper backgroundImageTime={backgroundImageTime}>
             <AppWrapper>
-                <BlurWrapper backgroundImage={backgroundImage}>
+                <BlurWrapper>
                     <Header coordinates={coordinates} />
                     <CurrentInfo />
                     <EventList />

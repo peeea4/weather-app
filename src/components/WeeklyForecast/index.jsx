@@ -9,13 +9,21 @@ export const WeeklyForecast = () => {
         (state) => state.weatherState.weather.list,
     )?.slice(1);
 
+    const currentDate = new Date();
+    const forecastList = weather
+        ?.filter(
+            (day) => new Date(day.dt_txt).getHours() === 15
+                && new Date(day.dt_txt).getDate() !== currentDate.getDate(),
+        )
+        .slice(0, 4);
+
     return (
         <WeeklyForecastWrapper>
             <TodayForecast />
             <ForecastList>
-                {weather?.map((day) => (new Date(day.dt_txt).getHours() === 15 ? (
+                {forecastList?.map((day) => (
                     <DailyForecast key={day.dt} day={day} />
-                ) : null))}
+                ))}
             </ForecastList>
         </WeeklyForecastWrapper>
     );

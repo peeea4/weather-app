@@ -3,7 +3,6 @@ import { createGlobalStyle } from "styled-components";
 import { FONT_COLOR } from "./styles";
 
 export const GlobalStyles = createGlobalStyle`
-
 * {
 
     margin: 0;
@@ -11,7 +10,7 @@ export const GlobalStyles = createGlobalStyle`
 
     box-sizing: border-box;
     
-    font-family: Dosis, sans-serif;
+    font-family: "Montserrat";
 
     color: ${FONT_COLOR.primary};
 }

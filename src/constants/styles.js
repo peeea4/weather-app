@@ -1,14 +1,16 @@
 export const FONT_SIZE = {
     heading: "70px",
-    dayOfWeek: "22px",
-    temperatureBig: "32px",
-    temperatureSmall: "36px",
+    dayOfWeekSmall: "18px",
+    dayOfWeekBig: "22px",
+    temperatureBig: "50px",
+    temperatureSmall: "32px",
     event: "20px",
     eventTime: "22px",
     date: "26px",
     city: "40px",
     country: "20px",
     input: "20px",
+    infoSmall: "20px",
 };
 
 export const FONT_COLOR = {

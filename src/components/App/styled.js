@@ -1,11 +1,14 @@
 import styled from "styled-components";
 
-import bg from "@/assets/bg.jpg";
-import backgroundImage from "@/assets/sunny2.jpg";
+import dayBackground from "@/assets/day.jpg";
+import nightBackground from "@/assets/night.jpg";
+import backgroundImage from "@/assets/sunny3.jpg";
 import { COLOR } from "@/constants/styles";
 
 export const BackgroundWrapper = styled.div`
-    background-image: url(${bg});
+    background-image: ${(props) => (props.backgroundImageTime === "night"
+        ? `url(${nightBackground})`
+        : `url(${dayBackground})`)};
     background-repeat: no-repeat;
     background-size: cover;
     width: 100%;
@@ -20,6 +23,7 @@ export const AppWrapper = styled.div`
     background-color: transparent;
     background-repeat: no-repeat;
     background-size: cover;
+    
 `;
 
 export const BlurWrapper = styled.div`

@@ -6,20 +6,21 @@ export const DailyForecastWrapper = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: calc(100% / 5);
+    width: calc(100% / 4);
     height: 100%;
-    padding: 40px 0px;
     justify-content: space-between;
 `;
 
 export const Day = styled.div`
-    font-size: ${FONT_SIZE.dayOfWeek};
+    font-size: ${FONT_SIZE.dayOfWeekSmall};
     background-color: ${COLOR.dayBg};
     padding: 6px 12px;
-    border-radius: 12px;
+    border-radius: 18px;
 `;
 
-export const Image = styled.div``;
+export const Image = styled.img`
+    width: 70px;
+`;
 
 export const Temperature = styled.div`
     font-size: ${FONT_SIZE.temperatureSmall};

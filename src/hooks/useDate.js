@@ -4,7 +4,10 @@ export const useDate = () => {
     const getCurrentDate = () => {
         const fullDate = new Date();
         return {
-            hours: fullDate.getHours(),
+            hours:
+                fullDate.getHours() < 10
+                    ? `0${fullDate.getHours()}`
+                    : fullDate.getHours(),
             minutes:
                 fullDate.getMinutes() < 10
                     ? `0${fullDate.getMinutes()}`

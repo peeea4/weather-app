@@ -16,6 +16,7 @@ export const useLocation = () => {
     };
 
     const error = (err) => {
+        // eslint-disable-next-line no-console
         console.warn(`ERROR(${err.code}): ${err.message}`);
     };
 
