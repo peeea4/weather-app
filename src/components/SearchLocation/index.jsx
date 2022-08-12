@@ -1,7 +1,7 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 
-import { fetchLocationAction } from "@/actions/location";
+import { fetchLocationAction, setCurrentLocation } from "@/actions/location";
 import search from "@/assets/icons/search.png";
 
 import {
@@ -10,22 +10,26 @@ import {
     SearchLocationWrapper,
 } from "./styled";
 
-export const SearchLocation = ({ coordinates }) => {
-    const [cityName, setCityName] = useState("");
-
+export const SearchLocation = ({ currentLocation }) => {
+    const [cityName, setCityName] = useState(currentLocation);
     const dispatch = useDispatch();
 
     const changeHandler = (e) => {
         setCityName(e.target.value);
     };
 
+    useEffect(() => {
+        setCityName(currentLocation);
+    }, [currentLocation]);
+
     const clickHandle = () => {
         dispatch(fetchLocationAction(cityName));
+        dispatch(setCurrentLocation(cityName));
     };
 
     const keyPressHandle = (e) => {
         if (e.key === "Enter") {
-            dispatch(fetchLocationAction(cityName));
+            clickHandle();
         }
     };
 

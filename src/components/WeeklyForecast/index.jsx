@@ -16,7 +16,9 @@ export const WeeklyForecast = () => {
                 && new Date(day.dt_txt).getDate() !== currentDate.getDate(),
         )
         .slice(0, 4);
-
+    const weather2 = useSelector((state) => state.weatherState.weatherFromStormGlass);
+    console.log(weather2);
+    console.log(weather);
     return (
         <WeeklyForecastWrapper>
             <TodayForecast />

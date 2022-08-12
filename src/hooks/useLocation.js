@@ -1,5 +1,6 @@
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
+import { fetchLocationAction } from "@/actions/location";
 import { fetchWeatherAction } from "@/actions/weather";
 
 export const useLocation = () => {
@@ -10,9 +11,16 @@ export const useLocation = () => {
     };
     const dispath = useDispatch();
 
+    const cityName = useSelector((state) => state.weatherState.currentLocation);
+
     const success = (pos) => {
-        const crd = pos.coords;
-        dispath(fetchWeatherAction(crd));
+        if (cityName) {
+            fetchLocationAction(cityName);
+        } else {
+            const crd = pos.coords;
+            dispath(fetchWeatherAction(crd));
+        // dispath(fetchWeatherAction2(crd));
+        }
     };
 
     const error = (err) => {

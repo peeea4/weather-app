@@ -1,8 +1,9 @@
 import axios from "axios";
 import { call, put, takeEvery } from "redux-saga/effects";
 
+import { setCurrentLocation } from "@/actions/location";
 import { setWeather } from "@/actions/weather";
-import { GET_LOCATION } from "@/constants/actions";
+import { GET_LOCATION, SET_CURRENT_LOCATION } from "@/constants/actions";
 
 import { fetchWeatherFromApi } from "./weather";
 
@@ -11,15 +12,29 @@ const fetchCoordsFromApi = (cityName) => axios.get(
 );
 
 export function* fetchLocationWorker({ payload: cityName }) {
-    const res = yield call(fetchCoordsFromApi, cityName);
-
-    const { data } = yield call(fetchWeatherFromApi, {
-        latitude: res.data[0].lat,
-        longitude: res.data[0].lon,
-    });
-    yield put(setWeather(data));
+    try {
+        const res = yield call(fetchCoordsFromApi, cityName);
+        const { data } = yield call(fetchWeatherFromApi, {
+            latitude: res.data[0].lat,
+            longitude: res.data[0].lon,
+        });
+        yield put(setWeather(data));
+    } catch {
+        yield put(setCurrentLocation("Nothing found"));
+        console.log("Nothing found. Try again");
+    }
 }
 
 export function* fetchLocationWatcher() {
     yield takeEvery(GET_LOCATION, fetchLocationWorker);
+}
+
+// setCurrentLocation
+
+export function* setCurrentLocationWorker({ payload: cityName }) {
+    yield put(setCurrentLocation(cityName));
+}
+
+export function* setCurrentLocationWatcher() {
+    yield takeEvery(SET_CURRENT_LOCATION, setCurrentLocationWorker);
 }
