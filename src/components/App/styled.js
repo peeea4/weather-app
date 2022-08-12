@@ -1,14 +1,10 @@
 import styled from "styled-components";
 
-import dayBackground from "@/assets/day.jpg";
-import nightBackground from "@/assets/night.jpg";
-import backgroundImage from "@/assets/sunny3.jpg";
 import { COLOR } from "@/constants/styles";
+import { WEATHER_BACKGROUND } from "@/constants/weatherIcons";
 
 export const BackgroundWrapper = styled.div`
-    background-image: ${(props) => (props.backgroundImageTime === "night"
-        ? `url(${nightBackground})`
-        : `url(${dayBackground})`)};
+    background-image: ${(props) => `url(${WEATHER_BACKGROUND[props.currentWeather]})`};
     background-repeat: no-repeat;
     background-size: cover;
     width: 100%;
@@ -19,11 +15,10 @@ export const BackgroundWrapper = styled.div`
 export const AppWrapper = styled.div`
     height: 100%;
     width: 100%;
-    background-image: url(${backgroundImage});
+
     background-color: transparent;
     background-repeat: no-repeat;
     background-size: cover;
-    
 `;
 
 export const BlurWrapper = styled.div`

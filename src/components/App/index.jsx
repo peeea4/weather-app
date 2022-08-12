@@ -1,7 +1,6 @@
-import { useEffect, useState } from "react";
-import { useDispatch } from "react-redux/es/exports";
+import { useEffect } from "react";
+import { useSelector } from "react-redux/es/exports";
 
-import { fetchWeatherAction } from "@/actions/weather";
 import {
     AppWrapper,
     BackgroundWrapper,
@@ -15,15 +14,23 @@ import { GlobalStyles } from "@/constants/globalStyles";
 import { useLocation } from "@/hooks/useLocation";
 
 export const App = () => {
-    const currentDate = new Date().getHours();
-    const backgroundImageTime =
-        currentDate <= 5 && currentDate <= 22 ? "night" : "day";
     const { getLocation, coordinates } = useLocation();
+
     useEffect(() => {
         getLocation();
     }, []);
+
+    const currentWeather = useSelector(
+        (state) => state.weatherState.weather?.list?.slice(0, 1)[0]?.weather[0].main,
+    );
+
+    const currentTime = new Date().getHours();
+    const currentWeatherName = `${currentWeather?.toLowerCase()}${
+        currentTime <= 5 && currentTime <= 22 ? "Night" : "Day"
+    }Bg`;
+
     return (
-        <BackgroundWrapper backgroundImageTime={backgroundImageTime}>
+        <BackgroundWrapper currentWeather={currentWeatherName}>
             <AppWrapper>
                 <BlurWrapper>
                     <Header coordinates={coordinates} />

@@ -1,7 +1,7 @@
 import axios from "axios";
 import { call, put, takeEvery } from "redux-saga/effects";
 
-import { fetchWeatherAction, setWeather } from "@/actions/weather";
+import { setWeather } from "@/actions/weather";
 import { GET_LOCATION } from "@/constants/actions";
 
 import { fetchWeatherFromApi } from "./weather";

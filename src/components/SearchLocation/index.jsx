@@ -23,6 +23,12 @@ export const SearchLocation = ({ coordinates }) => {
         dispatch(fetchLocationAction(cityName));
     };
 
+    const keyPressHandle = (e) => {
+        if (e.key === "Enter") {
+            dispatch(fetchLocationAction(cityName));
+        }
+    };
+
     return (
         <SearchLocationWrapper>
             <SearchLocationInput
@@ -30,6 +36,7 @@ export const SearchLocation = ({ coordinates }) => {
                 placeholder="Enter location"
                 value={cityName}
                 onChange={changeHandler}
+                onKeyDown={keyPressHandle}
             />
             <SearchLocationButton
                 onClick={clickHandle}
