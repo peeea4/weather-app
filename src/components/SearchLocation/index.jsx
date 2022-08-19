@@ -1,17 +1,20 @@
 import { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 import { fetchLocationAction, setCurrentLocation } from "@/actions/location";
 import search from "@/assets/icons/search.png";
-
 import {
     SearchLocationButton,
     SearchLocationInput,
     SearchLocationWrapper,
-} from "./styled";
+} from "@/components/SearchLocation/styled";
 
 export const SearchLocation = ({ currentLocation }) => {
     const [cityName, setCityName] = useState(currentLocation);
+
+    const lastUpdate = useSelector((state) => state.weatherState.lastUpdate);
+    const currentWeather = useSelector((state) => state.weatherState?.weather[cityName]);
+
     const dispatch = useDispatch();
 
     const changeHandler = (e) => {
@@ -23,7 +26,12 @@ export const SearchLocation = ({ currentLocation }) => {
     }, [currentLocation]);
 
     const clickHandle = () => {
-        dispatch(fetchLocationAction(cityName));
+        if (!currentWeather) {
+            dispatch(fetchLocationAction(cityName));
+        }
+        if (currentWeather && new Date().getTime() - lastUpdate >= 36000000) {
+            dispatch(fetchLocationAction(cityName));
+        }
         dispatch(setCurrentLocation(cityName));
     };
 
@@ -42,10 +50,7 @@ export const SearchLocation = ({ currentLocation }) => {
                 onChange={changeHandler}
                 onKeyDown={keyPressHandle}
             />
-            <SearchLocationButton
-                onClick={clickHandle}
-                backgroundImage={search}
-            />
+            <SearchLocationButton onClick={clickHandle} backgroundImage={search} />
         </SearchLocationWrapper>
     );
 };

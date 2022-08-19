@@ -1,12 +1,8 @@
 import { all } from "redux-saga/effects";
 
-import { fetchLocationWatcher } from "./location";
-import { fetchWeatherWatcher, fetchWeatherWatcher2 } from "./weather";
+import { fetchLocationWatcher } from "@/sagas/location";
+import { fetchWeatherWatcher, fetchWeatherWatcherAccu } from "@/sagas/weather";
 
 export function* rootWatcher() {
-    yield all([
-        fetchWeatherWatcher(),
-        fetchLocationWatcher(),
-        fetchWeatherWatcher2(),
-    ]);
+    yield all([fetchWeatherWatcher(), fetchLocationWatcher(), fetchWeatherWatcherAccu()]);
 }

@@ -1,50 +1,92 @@
 import { useSelector } from "react-redux";
 
-import { WEATHER_ICONS } from "@/constants/weatherIcons";
-
 import {
     Day,
     DetailedInfo,
+    DetailedInfoMobile,
     Icon,
-    Info,
     InfoItem,
+    MainInfo,
     Temperature,
     TodayForecastWrapper,
-} from "./styled";
+} from "@/components/TodayForecast/styled";
+import { WEATHER_ICONS } from "@/constants/weatherIcons";
 
 export const TodayForecast = () => {
+    const currentLocation = useSelector((state) => state.locationState.currentLocation);
     const currentWeather = useSelector(
-        (state) => state?.weatherState?.weather?.list,
+        (state) => state?.weatherState?.weather[currentLocation]?.list,
     )?.slice(0, 1)[0];
+    const weatherFromStormGlass = useSelector(
+        (state) => state.weatherState.weatherFromStormGlass.hours,
+    )
+        ?.filter(
+            (day) => new Date(day.time).getDate() === new Date().getDate()
+                && new Date(day.time).getHours() === new Date().getHours(),
+        )
+        .slice(0, 1)[0];
+    const currentAPI = useSelector((state) => state.apiState.currentAPI);
 
-    const temp = `${Math.round(currentWeather?.main?.temp)}°`;
-    const time = new Date(currentWeather?.dt_txt).getHours();
-    const iconName = `${currentWeather?.weather[0].main.toLowerCase()}${
-        time <= 5 && time <= 22 ? "Night" : "Day"
-    }`;
+    let weather = {
+        time: 0,
+        temperature: "",
+        feelsLike: "",
+        windSpeed: "",
+        humidity: "",
+        iconName: "",
+        icon: "",
+    };
+    if (currentAPI === "Open Weather") {
+        weather = {
+            time: new Date(currentWeather?.dt_txt).getHours(),
+            temperature: `${Math.round(currentWeather?.main?.temp)}°`,
+            feelsLike: currentWeather?.main.feels_like,
+            windSpeed: currentWeather?.wind.speed,
+            humidity: currentWeather?.main.humidity,
+            iconName: `${currentWeather?.weather[0].main.toLowerCase()}${
+                weather.time <= 5 || weather.time >= 22 ? "Day" : "Night"
+            }`,
+            icon: WEATHER_ICONS[weather.iconName],
+        };
+    } else if (currentAPI === "Storm Glass") {
+        weather = {
+            temperature: `${Math.round(weatherFromStormGlass?.airTemperature.noaa)}°`,
+            windSpeed: weatherFromStormGlass?.windSpeed.noaa,
+            humidity: weatherFromStormGlass?.humidity.noaa,
+        };
+    }
 
-    const icon = WEATHER_ICONS[iconName];
     return (
         <TodayForecastWrapper>
-            <Icon src={icon} />
-            <Info>
+            <MainInfo>
+                <Icon src={WEATHER_ICONS[weather.iconName]} />
                 <Day>TODAY</Day>
-                <Temperature>{temp}</Temperature>
-            </Info>
+                <Temperature>{weather.temperature}</Temperature>
+            </MainInfo>
             <DetailedInfo>
                 <InfoItem>
                     <p>Humidity:</p>
-                    <p>{currentWeather?.main.humidity}%</p>
+                    <p>{weather.humidity}%</p>
                 </InfoItem>
-                <InfoItem>
-                    <p>Feels like:</p>
-                    <p>{currentWeather?.main.feels_like}°</p>
-                </InfoItem>
+                {weather.feelsLike && (
+                    <InfoItem>
+                        <p>Feels like:</p>
+                        <p>{weather.feelsLike}°</p>
+                    </InfoItem>
+                )}
                 <InfoItem>
                     <p>Wind speed:</p>
-                    <p>{currentWeather?.wind.speed}</p>
+                    <p>{weather.windSpeed}</p>
                 </InfoItem>
             </DetailedInfo>
+            <DetailedInfoMobile>
+                <InfoItem>
+                    <p>{weather.humidity}%</p>
+                </InfoItem>
+                <InfoItem>
+                    <p>{weather.windSpeed}m/s</p>
+                </InfoItem>
+            </DetailedInfoMobile>
         </TodayForecastWrapper>
     );
 };

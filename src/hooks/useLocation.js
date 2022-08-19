@@ -1,25 +1,31 @@
 import { useDispatch, useSelector } from "react-redux";
 
 import { fetchLocationAction } from "@/actions/location";
-import { fetchWeatherAction } from "@/actions/weather";
+import { fetchWeatherAction, fetchWeatherActionStorm } from "@/actions/weather";
+
+const options = {
+    enableHighAccuracy: true,
+    timeout: 5000,
+    maximumAge: 0,
+};
 
 export const useLocation = () => {
-    const options = {
-        enableHighAccuracy: true,
-        timeout: 5000,
-        maximumAge: 0,
-    };
     const dispath = useDispatch();
 
-    const cityName = useSelector((state) => state.weatherState.currentLocation);
+    const currentLocation = useSelector((state) => state.locationState.currentLocation);
+    const lastUpdate = useSelector((state) => state.weatherState.lastUpdate);
+    const currentWeather = useSelector((state) => state.weatherState?.weather[currentLocation]);
 
     const success = (pos) => {
-        if (cityName) {
-            fetchLocationAction(cityName);
-        } else {
-            const crd = pos.coords;
-            dispath(fetchWeatherAction(crd));
-        // dispath(fetchWeatherAction2(crd));
+        console.log(pos);
+        if (!currentWeather || new Date().getTime() - lastUpdate >= 72000000) {
+            if (currentLocation) {
+                dispath(fetchLocationAction(currentLocation));
+            } else {
+                const crd = pos.coords;
+                dispath(fetchWeatherAction(crd));
+                // dispath(fetchWeatherActionStorm(crd));
+            }
         }
     };
 
@@ -29,5 +35,6 @@ export const useLocation = () => {
     };
 
     const getLocation = () => navigator.geolocation.getCurrentPosition(success, error, options);
+
     return { getLocation };
 };

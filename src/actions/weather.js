@@ -1,5 +1,8 @@
 import {
-    GET_FORECAST, GET_FORECAST2, SET_FORECAST, SET_FORECAST2,
+    GET_FORECAST,
+    GET_FORECAST_STORM,
+    SET_FORECAST,
+    SET_FORECAST_STORM,
 } from "@/constants/actions";
 
 export const fetchWeatherAction = (coords) => ({
@@ -12,12 +15,12 @@ export const setWeather = (payload) => ({
     payload,
 });
 
-export const fetchWeatherAction2 = (coords) => ({
-    type: GET_FORECAST2,
+export const fetchWeatherActionStorm = (coords) => ({
+    type: GET_FORECAST_STORM,
     payload: coords,
 });
 
-export const setWeather2 = (payload) => ({
-    type: SET_FORECAST2,
+export const setWeatherStorm = (payload) => ({
+    type: SET_FORECAST_STORM,
     payload,
 });

@@ -1,30 +1,44 @@
 import { useSelector } from "react-redux";
 
-import { DailyForecast } from "../DailyForecast";
-import { TodayForecast } from "../TodayForecast";
-import { ForecastList, WeeklyForecastWrapper } from "./styled";
+import { DailyForecast } from "@/components/DailyForecast";
+import { TodayForecast } from "@/components/TodayForecast";
+import { ForecastList, WeeklyForecastWrapper } from "@/components/WeeklyForecast/styled";
 
 export const WeeklyForecast = () => {
-    const weather = useSelector(
-        (state) => state.weatherState.weather.list,
+    const currentLocation = useSelector((state) => state.locationState.currentLocation);
+    const currentWeather = useSelector(
+        (state) => state?.weatherState?.weather[currentLocation]?.list,
     )?.slice(1);
+    const weatherFromStormGlass = useSelector(
+        (state) => state.weatherState.weatherFromStormGlass.hours,
+    );
+    const currentAPI = useSelector((state) => state.apiState.currentAPI);
 
     const currentDate = new Date();
-    const forecastList = weather
-        ?.filter(
-            (day) => new Date(day.dt_txt).getHours() === 15
-                && new Date(day.dt_txt).getDate() !== currentDate.getDate(),
-        )
-        .slice(0, 4);
-    const weather2 = useSelector((state) => state.weatherState.weatherFromStormGlass);
-    console.log(weather2);
-    console.log(weather);
+    let forecastList = [];
+
+    if (currentAPI === "Open Weather") {
+        forecastList = currentWeather
+            ?.filter(
+                (day) => new Date(day.dt_txt).getHours() === 12
+                    && new Date(day.dt_txt).getDate() !== currentDate.getDate(),
+            )
+            .slice(0, 4);
+    } else if (currentAPI === "Storm Glass") {
+        forecastList = weatherFromStormGlass
+            ?.filter(
+                (day) => new Date(day.time).getHours() === 12
+                    && new Date(day.time).getDate() > currentDate.getDate(),
+            )
+            .slice(0, 4);
+    }
+
     return (
         <WeeklyForecastWrapper>
             <TodayForecast />
             <ForecastList>
-                {forecastList?.map((day) => (
-                    <DailyForecast key={day.dt} day={day} />
+                {forecastList?.map((day, index) => (
+                    <DailyForecast key={index} day={day} />
                 ))}
             </ForecastList>
         </WeeklyForecastWrapper>

@@ -1,13 +1,9 @@
 import { useEffect } from "react";
 import { useSelector } from "react-redux/es/exports";
 
-import {
-    AppWrapper,
-    BackgroundWrapper,
-    BlurWrapper,
-} from "@/components/App/styled";
+import { AppWrapper, BackgroundWrapper, BlurWrapper } from "@/components/App/styled";
 import { CurrentInfo } from "@/components/CurrentInfo";
-import { EventList } from "@/components/EventList";
+import { EventContainer } from "@/components/EventContainer";
 import { Header } from "@/components/Header";
 import { WeeklyForecast } from "@/components/WeeklyForecast";
 import { GlobalStyles } from "@/constants/globalStyles";
@@ -20,13 +16,14 @@ export const App = () => {
         getLocation();
     }, []);
 
+    const currentLocation = useSelector((state) => state.locationState.currentLocation);
     const currentWeather = useSelector(
-        (state) => state.weatherState.weather?.list?.slice(0, 1)[0]?.weather[0].main,
+        (state) => state.weatherState.weather[currentLocation]?.list?.slice(0, 1)[0]?.weather[0].main,
     );
 
     const currentTime = new Date().getHours();
     const currentWeatherName = `${currentWeather?.toLowerCase()}${
-        currentTime <= 5 && currentTime <= 22 ? "Night" : "Day"
+        currentTime < 5 || currentTime > 20 ? "Night" : "Day"
     }Bg`;
 
     return (
@@ -35,7 +32,7 @@ export const App = () => {
                 <BlurWrapper>
                     <Header coordinates={coordinates} />
                     <CurrentInfo />
-                    <EventList />
+                    <EventContainer />
                     <WeeklyForecast />
                     <GlobalStyles />
                 </BlurWrapper>

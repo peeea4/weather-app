@@ -1,6 +1,6 @@
 import { createGlobalStyle } from "styled-components";
 
-import { FONT_COLOR } from "./styles";
+import { FONT_COLOR } from "@/constants/styles";
 
 export const GlobalStyles = createGlobalStyle`
 * {
@@ -36,5 +36,11 @@ body {
 h1 {
     padding: 0;
     margin: 0;
+}
+
+#modal-root {
+    position: absolute;
+    top: 0;
+    left: 0;
 }
 `;

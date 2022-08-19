@@ -1,13 +1,9 @@
-import {
-    SET_CURRENT_LOCATION,
-    SET_FORECAST,
-    SET_FORECAST2,
-} from "@/constants/actions";
+import { SET_FORECAST, SET_FORECAST_STORM } from "@/constants/actions";
 
 const defaultState = {
     weather: {},
     weatherFromStormGlass: {},
-    currentLocation: "",
+    lastUpdate: "",
 };
 
 export const weatherReducer = (state = defaultState, action) => {
@@ -15,17 +11,14 @@ export const weatherReducer = (state = defaultState, action) => {
         case SET_FORECAST:
             return {
                 ...state,
-                weather: action.payload,
+                weather: { ...state.weather, [action.payload.cityName]: action.payload.data },
+                lastUpdate: new Date().getTime(),
             };
-        case SET_FORECAST2:
+        case SET_FORECAST_STORM:
             return {
                 ...state,
-                weatherFromStormGlass: action.payload,
-            };
-        case SET_CURRENT_LOCATION:
-            return {
-                ...state,
-                currentLocation: action.payload,
+                weatherFromStormGlass: { ...state.weatherFromStormGlass, [action.payload.cityName]: action.payload.data },
+                lastUpdate: new Date().getTime(),
             };
         default:
             return state;
