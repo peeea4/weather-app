@@ -1,33 +1,38 @@
-import { useEffect, useState } from "react";
-import { useDispatch } from "react-redux/es/exports";
+import { useEffect } from "react";
+import { useSelector } from "react-redux/es/exports";
 
-import { fetchWeatherAction } from "@/actions/weather";
-import {
-    AppWrapper,
-    BackgroundWrapper,
-    BlurWrapper,
-} from "@/components/App/styled";
+import { AppWrapper, BackgroundWrapper, BlurWrapper } from "@/components/App/styled";
 import { CurrentInfo } from "@/components/CurrentInfo";
-import { EventList } from "@/components/EventList";
+import { EventContainer } from "@/components/EventContainer";
 import { Header } from "@/components/Header";
 import { WeeklyForecast } from "@/components/WeeklyForecast";
 import { GlobalStyles } from "@/constants/globalStyles";
 import { useLocation } from "@/hooks/useLocation";
 
 export const App = () => {
-    const [backgroundImage, setBackgroundImage] = useState();
-    const [backgroundColor, setBackgroundColor] = useState();
     const { getLocation, coordinates } = useLocation();
+
     useEffect(() => {
         getLocation();
     }, []);
+
+    const currentLocation = useSelector((state) => state.locationState.currentLocation);
+    const currentWeather = useSelector(
+        (state) => state.weatherState.weather[currentLocation]?.list?.slice(0, 1)[0]?.weather[0].main,
+    );
+
+    const currentTime = new Date().getHours();
+    const currentWeatherName = `${currentWeather?.toLowerCase()}${
+        currentTime < 5 || currentTime > 20 ? "Night" : "Day"
+    }Bg`;
+
     return (
-        <BackgroundWrapper backgroundColor={backgroundColor}>
+        <BackgroundWrapper currentWeather={currentWeatherName}>
             <AppWrapper>
-                <BlurWrapper backgroundImage={backgroundImage}>
+                <BlurWrapper>
                     <Header coordinates={coordinates} />
                     <CurrentInfo />
-                    <EventList />
+                    <EventContainer />
                     <WeeklyForecast />
                     <GlobalStyles />
                 </BlurWrapper>

@@ -1,14 +1,21 @@
-import { SelectWrapper } from "./styled";
+import { useDispatch, useSelector } from "react-redux";
+
+import { setApiAction } from "@/actions/api";
+import { SelectWrapper } from "@/components/SelectAPI/styled";
 
 export const SelectAPI = () => {
+    const dispatch = useDispatch();
+
+    const currentApi = useSelector((state) => state.apiState.currentAPI);
+
     const chooseAPIHandle = (e) => {
-        console.log(e.target.name);
+        dispatch(setApiAction(e.target.value));
     };
 
     return (
-        <SelectWrapper onChange={chooseAPIHandle}>
-            <option name="openWeather">First</option>
-            <option name="stormGlass">Second</option>
+        <SelectWrapper value={currentApi} onChange={chooseAPIHandle}>
+            <option>Open Weather</option>
+            <option>Storm Glass</option>
         </SelectWrapper>
     );
 };

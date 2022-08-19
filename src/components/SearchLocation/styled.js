@@ -23,6 +23,7 @@ export const SearchLocationInput = styled.input`
     &::placeholder {
         color: ${FONT_COLOR.placeholder};
     }
+    
 `;
 
 export const SearchLocationButton = styled.button`

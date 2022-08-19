@@ -1,24 +1,40 @@
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
-import { fetchWeatherAction } from "@/actions/weather";
+import { fetchLocationAction } from "@/actions/location";
+import { fetchWeatherAction, fetchWeatherActionStorm } from "@/actions/weather";
+
+const options = {
+    enableHighAccuracy: true,
+    timeout: 5000,
+    maximumAge: 0,
+};
 
 export const useLocation = () => {
-    const options = {
-        enableHighAccuracy: true,
-        timeout: 5000,
-        maximumAge: 0,
-    };
     const dispath = useDispatch();
 
+    const currentLocation = useSelector((state) => state.locationState.currentLocation);
+    const lastUpdate = useSelector((state) => state.weatherState.lastUpdate);
+    const currentWeather = useSelector((state) => state.weatherState?.weather[currentLocation]);
+
     const success = (pos) => {
-        const crd = pos.coords;
-        dispath(fetchWeatherAction(crd));
+        console.log(pos);
+        if (!currentWeather || new Date().getTime() - lastUpdate >= 72000000) {
+            if (currentLocation) {
+                dispath(fetchLocationAction(currentLocation));
+            } else {
+                const crd = pos.coords;
+                dispath(fetchWeatherAction(crd));
+                // dispath(fetchWeatherActionStorm(crd));
+            }
+        }
     };
 
     const error = (err) => {
+        // eslint-disable-next-line no-console
         console.warn(`ERROR(${err.code}): ${err.message}`);
     };
 
     const getLocation = () => navigator.geolocation.getCurrentPosition(success, error, options);
+
     return { getLocation };
 };

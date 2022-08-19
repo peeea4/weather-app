@@ -1,9 +1,9 @@
 import { useSelector } from "react-redux";
 
-import { LocationWrapper } from "./styled";
+import { LocationWrapper } from "@/components/Location/styled";
 
 export const Location = () => {
-    const currentLocation = useSelector((state) => state.weatherState.weather);
+    const currentLocation = useSelector((state) => state.locationState.currentLocation);
 
-    return <LocationWrapper>{currentLocation?.city?.name}</LocationWrapper>;
+    return <LocationWrapper>{currentLocation}</LocationWrapper>;
 };

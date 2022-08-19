@@ -1,17 +1,19 @@
-import { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 
-import { fetchLocationAction } from "@/actions/location";
+import { fetchLocationAction, setCurrentLocation } from "@/actions/location";
 import search from "@/assets/icons/search.png";
-
 import {
     SearchLocationButton,
     SearchLocationInput,
     SearchLocationWrapper,
-} from "./styled";
+} from "@/components/SearchLocation/styled";
 
-export const SearchLocation = ({ coordinates }) => {
-    const [cityName, setCityName] = useState("");
+export const SearchLocation = ({ currentLocation }) => {
+    const [cityName, setCityName] = useState(currentLocation);
+
+    const lastUpdate = useSelector((state) => state.weatherState.lastUpdate);
+    const currentWeather = useSelector((state) => state.weatherState?.weather[cityName]);
 
     const dispatch = useDispatch();
 
@@ -19,8 +21,24 @@ export const SearchLocation = ({ coordinates }) => {
         setCityName(e.target.value);
     };
 
+    useEffect(() => {
+        setCityName(currentLocation);
+    }, [currentLocation]);
+
     const clickHandle = () => {
-        dispatch(fetchLocationAction(cityName));
+        if (!currentWeather) {
+            dispatch(fetchLocationAction(cityName));
+        }
+        if (currentWeather && new Date().getTime() - lastUpdate >= 36000000) {
+            dispatch(fetchLocationAction(cityName));
+        }
+        dispatch(setCurrentLocation(cityName));
+    };
+
+    const keyPressHandle = (e) => {
+        if (e.key === "Enter") {
+            clickHandle();
+        }
     };
 
     return (
@@ -30,11 +48,9 @@ export const SearchLocation = ({ coordinates }) => {
                 placeholder="Enter location"
                 value={cityName}
                 onChange={changeHandler}
+                onKeyDown={keyPressHandle}
             />
-            <SearchLocationButton
-                onClick={clickHandle}
-                backgroundImage={search}
-            />
+            <SearchLocationButton onClick={clickHandle} backgroundImage={search} />
         </SearchLocationWrapper>
     );
 };
