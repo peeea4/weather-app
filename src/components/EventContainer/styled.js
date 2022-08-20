@@ -4,7 +4,7 @@ import { COLOR, FONT_SIZE } from "@/constants/styles";
 
 export const EventContainerWrapper = styled.div`
     padding: 10px 80px;
-    overflow-y: auto;
+    overflow-y: auto; 
     @media (max-width: 800px) {
         padding: 10px 30px;
     }
@@ -15,6 +15,7 @@ export const EventContainerWrapper = styled.div`
 
 export const EventListWrapper = styled.div`
     margin: 20px 0 0 20px;
+
 `;
 
 export const AuthorizeContainer = styled.div`

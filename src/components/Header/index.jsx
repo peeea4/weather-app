@@ -13,6 +13,10 @@ export const Header = () => {
     const currentLocation = useSelector((state) => state.locationState.currentLocation);
     const [showModal, setShowModal] = useState(false);
 
+    const toggleModalStatus = () => {
+        setShowModal(!showModal);
+    };
+
     return (
         <HeaderWrapper>
             <NavBar>
@@ -20,14 +24,14 @@ export const Header = () => {
                 <SelectAPI />
             </NavBar>
             <NavBarMobile>
-                <NavBtn onClick={() => setShowModal(!showModal)}>
+                <NavBtn onClick={() => toggleModalStatus()}>
                     <Span></Span>
                     <Span></Span>
                     <Span></Span>
                 </NavBtn>
                 {showModal && (
                     <Portal>
-                        <NavigationModal onClose={setShowModal} />
+                        <NavigationModal onClose={toggleModalStatus} />
                     </Portal>
                 )}
             </NavBarMobile>

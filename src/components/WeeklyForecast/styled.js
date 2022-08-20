@@ -8,8 +8,8 @@ export const WeeklyForecastWrapper = styled.div`
     justify-content: space-between;
     align-self: flex-end;
     background-color: ${COLOR.mainBgTransp};
-    height: max-content;
-    padding: 10px;
+    height: 100%;
+    padding: px 10px;
     @media (max-width: 576px) {
         flex-direction: column;
         width: 100%;

@@ -14,9 +14,19 @@ export const TodayForecastWrapper = styled.div`
         padding: 0 10px;
     }
     @media (max-width: 576px) {
+        display: none;
         justify-content: flex-start;
         width: 100%;
         padding: 0 10px;
+        background-color: ${COLOR.todayBackground};
+    }
+`;
+
+export const TodayForecastWrapperMobile = styled.div`
+    display: none;
+    @media (max-width: 576px) {
+        display: block;
+        width: 100%;
         background-color: ${COLOR.todayBackground};
     }
 `;
@@ -39,9 +49,11 @@ export const MainInfo = styled.div`
         row-gap: 0px;
     }
     @media (max-width: 576px) {
+        width: 50%;
         grid-template-areas: "day icon temperature";
         padding: 0px 0px;
         justify-items: flex-start;
+        gap: 14%;
     }
 `;
 
@@ -61,9 +73,9 @@ export const DetailedInfoMobile = styled.div`
     display: none;
     @media (max-width: 576px) {
         display: flex;
-        justify-content: space-around;
+        justify-content: space-between;
         gap: 15px;
-        width: 100%;
+        width: 50%;
     }
 `;
 
@@ -71,7 +83,7 @@ export const Icon = styled.img`
     grid-area: icon;
     width: 90px;
     @media (max-width: 576px) {
-        width: 70px;
+        width: 60px;
     }
     @media (max-width: 300px) {
         width: 50px;

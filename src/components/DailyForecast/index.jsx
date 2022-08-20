@@ -2,7 +2,7 @@ import { useSelector } from "react-redux";
 
 import {
     DailyForecastWrapper,
-    Day,
+    DayOfWeek,
     Humidity,
     Image,
     Temperature,
@@ -53,7 +53,7 @@ export const DailyForecast = ({ day }) => {
 
     return (
         <DailyForecastWrapper>
-            <Day>{weather.dayOfWeek}</Day>
+            <DayOfWeek>{weather.dayOfWeek}</DayOfWeek>
             <Image src={WEATHER_ICONS[weather.iconName] || null} />
             <Temperature>{weather.temp}</Temperature>
             <Humidity>{weather.humidity}</Humidity>

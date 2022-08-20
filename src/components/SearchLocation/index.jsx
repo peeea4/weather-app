@@ -9,7 +9,7 @@ import {
     SearchLocationWrapper,
 } from "@/components/SearchLocation/styled";
 
-export const SearchLocation = ({ currentLocation }) => {
+export const SearchLocation = ({ currentLocation, onClose }) => {
     const [cityName, setCityName] = useState(currentLocation);
 
     const lastUpdate = useSelector((state) => state.weatherState.lastUpdate);
@@ -33,6 +33,9 @@ export const SearchLocation = ({ currentLocation }) => {
             dispatch(fetchLocationAction(cityName));
         }
         dispatch(setCurrentLocation(cityName));
+        if (onClose) {
+            onClose();
+        }
     };
 
     const keyPressHandle = (e) => {

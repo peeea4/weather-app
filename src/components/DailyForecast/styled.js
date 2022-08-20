@@ -9,7 +9,7 @@ export const DailyForecastWrapper = styled.div`
     width: calc(100% / 4);
     justify-content: space-between;
     gap: 6px;
-
+    padding: 2px 10px;
     @media (max-width: 850px) {
         width: 130px;
         padding: 0 30px;
@@ -30,10 +30,10 @@ export const DailyForecastWrapper = styled.div`
     }
 `;
 
-export const Day = styled.div`
+export const DayOfWeek = styled.div`
     font-size: ${FONT_SIZE.dayOfWeekS};
     background-color: ${COLOR.dayBg};
-    padding: 6px 12px;
+    padding: 4px 12px;
     border-radius: 18px;
     @media (max-width: 576px) {
         display: flex;
@@ -53,7 +53,7 @@ export const Day = styled.div`
 `;
 
 export const Image = styled.img`
-    width: 60px;
+    width: 55px;
     @media (max-width: 576px) {
         width: 50px;
     }

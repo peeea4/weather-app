@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-import { COLOR } from "@/constants/styles";
+import { COLOR, FONT_SIZE } from "@/constants/styles";
 
 export const NavigationModalWrapper = styled.div`
     position: fixed;
@@ -8,9 +8,10 @@ export const NavigationModalWrapper = styled.div`
     height: 100%;
     background-color: ${COLOR.mainBgTranspModal};
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-start;
+    flex-direction: column;
     align-items: flex-start;
-    padding: 20px 50px;
+    padding: 10px;
     @media (max-width: 450px) {
         padding: 20px 20px;
     }
@@ -19,25 +20,26 @@ export const NavigationModalWrapper = styled.div`
     }
 `;
 
+export const Header = styled.header`
+    font-size: ${FONT_SIZE.headingXS};
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    padding: 0 10px 0 30px;
+`;
+
+export const Title = styled.h2`
+    font-size: ${FONT_SIZE.headingXS};
+`;
+
 export const ContentWrapper = styled.div`
+    padding: 30px 20px;
     display: flex;
     flex-direction: column;
     gap: 16px;
     max-width: 300px;
-    select {
-        max-width: 280px;
-    }
     button {
         margin: 0;
-    }
-    input {
-        max-width: 250px;
-    }
-    @media (max-width: 360px) {
-        max-width: 250px;
-        input {
-            max-width: 200px;
-        }
     }
 `;
 
@@ -48,6 +50,8 @@ export const CloseBtn = styled.button`
     justify-content: center;
     background-color: transparent;
     border: 0;
+    width: 30px;
+    height: 30px;
     cursor: pointer;
     span {
         width: 30px;

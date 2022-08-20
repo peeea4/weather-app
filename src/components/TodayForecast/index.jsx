@@ -3,14 +3,22 @@ import { useSelector } from "react-redux";
 import {
     Day,
     DetailedInfo,
-    DetailedInfoMobile,
     Icon,
     InfoItem,
     MainInfo,
     Temperature,
     TodayForecastWrapper,
+    TodayForecastWrapperMobile,
 } from "@/components/TodayForecast/styled";
 import { WEATHER_ICONS } from "@/constants/weatherIcons";
+
+import {
+    DailyForecastWrapper,
+    DayOfWeek,
+    Humidity,
+    Image,
+    WindSpeed,
+} from "../DailyForecast/styled";
 
 export const TodayForecast = () => {
     const currentLocation = useSelector((state) => state.locationState.currentLocation);
@@ -57,36 +65,39 @@ export const TodayForecast = () => {
     }
 
     return (
-        <TodayForecastWrapper>
-            <MainInfo>
-                <Icon src={WEATHER_ICONS[weather.iconName]} />
-                <Day>TODAY</Day>
-                <Temperature>{weather.temperature}</Temperature>
-            </MainInfo>
-            <DetailedInfo>
-                <InfoItem>
-                    <p>Humidity:</p>
-                    <p>{weather.humidity}%</p>
-                </InfoItem>
-                {weather.feelsLike && (
+        <>
+            <TodayForecastWrapper>
+                <MainInfo>
+                    <Icon src={WEATHER_ICONS[weather.iconName]} />
+                    <Day>TODAY</Day>
+                    <Temperature>{weather.temperature}</Temperature>
+                </MainInfo>
+                <DetailedInfo>
                     <InfoItem>
-                        <p>Feels like:</p>
-                        <p>{weather.feelsLike}°</p>
+                        <p>Humidity:</p>
+                        <p>{weather.humidity}%</p>
                     </InfoItem>
-                )}
-                <InfoItem>
-                    <p>Wind speed:</p>
-                    <p>{weather.windSpeed}</p>
-                </InfoItem>
-            </DetailedInfo>
-            <DetailedInfoMobile>
-                <InfoItem>
-                    <p>{weather.humidity}%</p>
-                </InfoItem>
-                <InfoItem>
-                    <p>{weather.windSpeed}m/s</p>
-                </InfoItem>
-            </DetailedInfoMobile>
-        </TodayForecastWrapper>
+                    {weather.feelsLike && (
+                        <InfoItem>
+                            <p>Feels like:</p>
+                            <p>{weather.feelsLike}°</p>
+                        </InfoItem>
+                    )}
+                    <InfoItem>
+                        <p>Wind speed:</p>
+                        <p>{weather.windSpeed}</p>
+                    </InfoItem>
+                </DetailedInfo>
+            </TodayForecastWrapper>
+            <TodayForecastWrapperMobile>
+                <DailyForecastWrapper>
+                    <DayOfWeek>NOW</DayOfWeek>
+                    <Image src={WEATHER_ICONS[weather.iconName] || null} />
+                    <Temperature>{weather.temperature}</Temperature>
+                    <Humidity>{weather.humidity} %</Humidity>
+                    <WindSpeed>{weather.windSpeed} m/s</WindSpeed>
+                </DailyForecastWrapper>
+            </TodayForecastWrapperMobile>
+        </>
     );
 };
