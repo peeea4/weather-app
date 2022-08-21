@@ -5,12 +5,6 @@ export const HeaderWrapper = styled.header`
     align-items: center;
     justify-content: flex-end;
     padding: 0px 30px;
-    @media (max-width: 991.98px) {
-        justify-content: center;
-    }
-    @media (max-width: 767.98px) {
-        justify-content: flex-end;
-    }
     @media (max-width: 576px) {
         padding: 0px 5px;
     }

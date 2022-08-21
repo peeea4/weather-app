@@ -19,6 +19,7 @@ export const FONT_SIZE = {
     country: "20px",
     input: "20px",
     info: "20px",
+    infoM: "17px",
     infoS: "14px",
     button: "18px",
     buttonXS: "15px",
@@ -39,4 +40,5 @@ export const COLOR = {
     borderColor: "rgba(220, 220, 220, 1)",
     inputBg: "rgba(50, 50, 50, 0.3)",
     dayBg: "rgba(40, 40, 40, 0.6)",
+    loaderColor: "rgba(111, 0, 255, 1)",
 };

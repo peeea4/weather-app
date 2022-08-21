@@ -11,7 +11,7 @@ export const DateWrapper = styled.div`
 export const HeadingWrapper = styled.h1`
     font-size: ${FONT_SIZE.heading};
     text-align: left;
-    @media (max-width: 767.98px) {
+    @media (max-width: 1000px) {
         font-size: ${FONT_SIZE.headingS};
     }
     @media (max-width: 576px) {
@@ -21,7 +21,7 @@ export const HeadingWrapper = styled.h1`
 
 export const ParagraphWrapper = styled.p`
     font-size: ${FONT_SIZE.date};
-    @media (max-width: 767.98px) {
+    @media (max-width: 1000px) {
         font-size: ${FONT_SIZE.dateS};
     }
     @media (max-width: 576px) {

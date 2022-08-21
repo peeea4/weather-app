@@ -1,6 +1,6 @@
 import { applyMiddleware, createStore } from "redux";
 import { persistReducer, persistStore } from "redux-persist";
-import storage from "redux-persist/lib/storage"; // defaults to localStorage for web
+import storage from "redux-persist/lib/storage";
 import createSagaMiddleware from "redux-saga";
 
 import { rootReducer } from "@/reducers";

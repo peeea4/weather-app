@@ -35,6 +35,9 @@ export const DayOfWeek = styled.div`
     background-color: ${COLOR.dayBg};
     padding: 4px 12px;
     border-radius: 18px;
+    @media (max-width: 850px) {
+        padding: 2px 12px;
+    }
     @media (max-width: 576px) {
         display: flex;
         justify-content: center;
@@ -54,6 +57,9 @@ export const DayOfWeek = styled.div`
 
 export const Image = styled.img`
     width: 55px;
+    @media (max-width: 850px) {
+        width: 50px;
+    }
     @media (max-width: 576px) {
         width: 50px;
     }

@@ -5,8 +5,9 @@ import { AppWrapper, BackgroundWrapper, BlurWrapper } from "@/components/App/sty
 import { CurrentInfo } from "@/components/CurrentInfo";
 import { EventContainer } from "@/components/EventContainer";
 import { Header } from "@/components/Header";
+import { Loader } from "@/components/Loader";
+import { Portal } from "@/components/Portal";
 import { WeeklyForecast } from "@/components/WeeklyForecast";
-import { GlobalStyles } from "@/constants/globalStyles";
 import { useLocation } from "@/hooks/useLocation";
 
 export const App = () => {
@@ -20,13 +21,19 @@ export const App = () => {
     const currentWeather = useSelector(
         (state) => state.weatherState.weather[currentLocation]?.list?.slice(0, 1)[0]?.weather[0].main,
     );
-
+    const currentState = useSelector((state) => state);
+    console.log(currentState);
+    const isLoading = useSelector((state) => state.loaderState.isLoading);
     const currentTime = new Date().getHours();
     const currentWeatherName = `${currentWeather?.toLowerCase()}${
         currentTime < 5 || currentTime > 20 ? "Night" : "Day"
     }Bg`;
 
-    return (
+    return isLoading ? (
+        <Portal>
+            <Loader />
+        </Portal>
+    ) : (
         <BackgroundWrapper currentWeather={currentWeatherName}>
             <AppWrapper>
                 <BlurWrapper>
@@ -34,7 +41,6 @@ export const App = () => {
                     <CurrentInfo />
                     <EventContainer />
                     <WeeklyForecast />
-                    <GlobalStyles />
                 </BlurWrapper>
             </AppWrapper>
         </BackgroundWrapper>

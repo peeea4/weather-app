@@ -17,14 +17,12 @@ export const useLocation = () => {
     const currentWeather = useSelector((state) => state.weatherState?.weather[currentLocation]);
 
     const success = (pos) => {
-        console.log(pos);
         if (!currentWeather || new Date().getTime() - lastUpdate >= 72000000) {
             if (currentLocation) {
                 dispath(fetchLocationAction(currentLocation));
             } else {
                 const crd = pos.coords;
                 dispath(fetchWeatherAction(crd));
-                // dispath(fetchWeatherActionStorm(crd));
             }
         }
     };
