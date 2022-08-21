@@ -49,7 +49,7 @@ export const DayOfWeek = styled.div`
         font-size: ${FONT_SIZE.dayOfWeekXS};
         width: 60px;
     }
-    @media (max-width: 300px) {
+    @media (max-width: 305px) {
         width: 55px;
         padding: 2px 0px;
     }
@@ -92,10 +92,7 @@ export const Humidity = styled.div`
     }
     @media (max-width: 350px) {
         width: 35px;
-    }
-    @media (max-width: 300px) {
-        width: 30px;
-    }
+    } 
 `;
 
 export const WindSpeed = styled.div`

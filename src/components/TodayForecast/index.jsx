@@ -85,7 +85,7 @@ export const TodayForecast = () => {
                     )}
                     <InfoItem>
                         <p>Wind speed:</p>
-                        <p>{weather.windSpeed}</p>
+                        <p>{weather.windSpeed} m/s</p>
                     </InfoItem>
                 </DetailedInfo>
             </TodayForecastWrapper>

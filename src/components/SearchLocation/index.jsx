@@ -28,11 +28,11 @@ export const SearchLocation = ({ currentLocation, onClose }) => {
     const clickHandle = () => {
         if (!currentWeather) {
             dispatch(fetchLocationAction(cityName));
-        }
-        if (currentWeather && new Date().getTime() - lastUpdate >= 36000000) {
+        } else if (currentWeather && new Date().getTime() - lastUpdate >= 36000000) {
             dispatch(fetchLocationAction(cityName));
+        } else {
+            dispatch(setCurrentLocation(cityName));
         }
-        dispatch(setCurrentLocation(cityName));
         if (onClose) {
             onClose();
         }
@@ -52,6 +52,7 @@ export const SearchLocation = ({ currentLocation, onClose }) => {
                 value={cityName}
                 onChange={changeHandler}
                 onKeyDown={keyPressHandle}
+                onInput={clickHandle}
             />
             <SearchLocationButton onClick={clickHandle} backgroundImage={search} />
         </SearchLocationWrapper>

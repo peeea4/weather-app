@@ -1,5 +1,7 @@
 import axios from "axios";
-import { call, put, takeEvery } from "redux-saga/effects";
+import {
+    call, delay, put, takeEvery,
+} from "redux-saga/effects";
 
 import { setLoaderStatusAction } from "@/actions/loader";
 import { setCurrentLocation } from "@/actions/location";
@@ -19,12 +21,14 @@ export function* fetchLocationWorker({ payload: cityName }) {
             latitude: res.data[0].lat,
             longitude: res.data[0].lon,
         });
-        yield put(setWeather({ cityName: res?.data[0]?.name, data }));
+        yield put(setWeather({ cityName, data }));
         // const { dataStorm } = yield call(fetchWeatherFromApiStorm, {
         //     latitude: res.data[0].lat,
         //     longitude: res.data[0].lon,
         // });
-        // yield put(setWeatherStorm({ cityName: res?.data[0]?.name, dataStorm }));
+        // yield put(setWeatherStorm({ cityName, dataStorm }));
+        yield put(setCurrentLocation(cityName));
+        yield delay(700);
         yield put(setLoaderStatusAction(false));
     } catch {
         yield put(setLoaderStatusAction(false));

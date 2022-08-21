@@ -29,14 +29,15 @@ export const App = () => {
         currentTime < 5 || currentTime > 20 ? "Night" : "Day"
     }Bg`;
 
-    return isLoading ? (
-        <Portal>
-            <Loader />
-        </Portal>
-    ) : (
+    return (
         <BackgroundWrapper currentWeather={currentWeatherName}>
             <AppWrapper>
                 <BlurWrapper>
+                    {isLoading && (
+                        <Portal>
+                            <Loader />
+                        </Portal>
+                    )}
                     <Header coordinates={coordinates} />
                     <CurrentInfo />
                     <EventContainer />

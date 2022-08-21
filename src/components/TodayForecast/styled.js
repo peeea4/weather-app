@@ -20,7 +20,7 @@ export const TodayForecastWrapper = styled.div`
         display: none;
         justify-content: flex-start;
         width: 100%;
-        padding: 0  10px;
+        padding: 0 10px;
         background-color: ${COLOR.todayBackground};
     }
 `;
@@ -30,7 +30,13 @@ export const TodayForecastWrapperMobile = styled.div`
     @media (max-width: 576px) {
         display: block;
         width: 100%;
-        padding-right: 5px;
+        padding: 5px 5px 5px 0;
+        background-color: ${COLOR.todayBackground};
+    }
+    @media (max-width: 300px) {
+        display: block;
+        width: 100%;
+        padding: 5px 5px;
         background-color: ${COLOR.todayBackground};
     }
 `;
