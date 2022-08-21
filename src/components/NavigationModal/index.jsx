@@ -22,7 +22,6 @@ export const NavigationModal = ({ onClose }) => {
                     <span></span>
                 </CloseBtn>
             </Header>
-
             <ContentWrapper>
                 <SearchLocation currentLocation={currentLocation} onClose={onClose} />
                 <SelectAPI />
