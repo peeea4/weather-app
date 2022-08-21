@@ -13,25 +13,22 @@ export const GlobalStyles = createGlobalStyle`
     font-family: "Montserrat";
 
     color: ${FONT_COLOR.primary};
-    /* width */
+
     ::-webkit-scrollbar {
         width: 6px;
         height: 6px;
     }
 
-    /* Track */
     ::-webkit-scrollbar-track {
         background: rgba(158, 158, 158, 0.5);
         border-radius: 8px;
     }
 
-    /* Handle */
     ::-webkit-scrollbar-thumb {
         background: rgba(69, 69, 69, 0.7);
         border-radius: 8px;
     }
 
-    /* Handle on hover */
     ::-webkit-scrollbar-thumb:hover {
         background: rgba(69, 69, 69, 1);
     }

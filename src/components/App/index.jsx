@@ -21,9 +21,8 @@ export const App = () => {
     const currentWeather = useSelector(
         (state) => state.weatherState.weather[currentLocation]?.list?.slice(0, 1)[0]?.weather[0].main,
     );
-    const currentState = useSelector((state) => state);
-    console.log(currentState);
     const isLoading = useSelector((state) => state.loaderState.isLoading);
+
     const currentTime = new Date().getHours();
     const currentWeatherName = `${currentWeather?.toLowerCase()}${
         currentTime < 5 || currentTime > 20 ? "Night" : "Day"
