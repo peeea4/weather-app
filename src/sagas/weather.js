@@ -26,8 +26,8 @@ export function* fetchWeatherWorker({ payload: coords }) {
     yield put(setLoaderStatusAction(true));
     const { data } = yield call(fetchWeatherFromApi, coords);
     yield put(setWeather({ cityName: data?.city?.name, data }));
-    // const dataStorm = yield call(fetchWeatherFromApiStorm, coords);
-    // yield put(setWeatherStorm({ cityName: data?.city?.name, data: dataStorm.data }));
+    const dataStorm = yield call(fetchWeatherFromApiStorm, coords);
+    yield put(setWeatherStorm({ cityName: data?.city?.name, data: dataStorm.data }));
     yield put(setCurrentLocation(data?.city?.name));
     yield put(setLoaderStatusAction(false));
 }

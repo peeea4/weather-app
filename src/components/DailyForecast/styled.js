@@ -92,7 +92,7 @@ export const Humidity = styled.div`
     }
     @media (max-width: 350px) {
         width: 35px;
-    } 
+    }
 `;
 
 export const WindSpeed = styled.div`

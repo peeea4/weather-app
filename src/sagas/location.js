@@ -22,11 +22,11 @@ export function* fetchLocationWorker({ payload: cityName }) {
             longitude: res.data[0].lon,
         });
         yield put(setWeather({ cityName, data }));
-        // const { dataStorm } = yield call(fetchWeatherFromApiStorm, {
-        //     latitude: res.data[0].lat,
-        //     longitude: res.data[0].lon,
-        // });
-        // yield put(setWeatherStorm({ cityName, dataStorm }));
+        const { dataStorm } = yield call(fetchWeatherFromApiStorm, {
+            latitude: res.data[0].lat,
+            longitude: res.data[0].lon,
+        });
+        yield put(setWeatherStorm({ cityName, dataStorm }));
         yield put(setCurrentLocation(cityName));
         yield delay(700);
         yield put(setLoaderStatusAction(false));

@@ -17,7 +17,10 @@ export const weatherReducer = (state = defaultState, action) => {
         case SET_FORECAST_STORM:
             return {
                 ...state,
-                weatherFromStormGlass: { ...state.weatherFromStormGlass, [action.payload.cityName]: action.payload.data },
+                weatherFromStormGlass: {
+                    ...state.weatherFromStormGlass,
+                    [action.payload.cityName]: action.payload.data,
+                },
                 lastUpdate: new Date().getTime(),
             };
         default:

@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from "react-redux";
 
 import { fetchLocationAction } from "@/actions/location";
-import { fetchWeatherAction, fetchWeatherActionStorm } from "@/actions/weather";
+import { fetchWeatherAction } from "@/actions/weather";
 
 const options = {
     enableHighAccuracy: true,

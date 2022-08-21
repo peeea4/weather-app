@@ -13,6 +13,7 @@ export const WeeklyForecast = () => {
         (state) => state.weatherState.weatherFromStormGlass.hours,
     );
     const currentAPI = useSelector((state) => state.apiState.currentAPI);
+
     const currentDate = new Date();
     let forecastList = [];
 
