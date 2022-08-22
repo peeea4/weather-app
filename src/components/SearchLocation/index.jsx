@@ -52,7 +52,6 @@ export const SearchLocation = ({ currentLocation, onClose }) => {
                 value={cityName}
                 onChange={changeHandler}
                 onKeyDown={keyPressHandle}
-                onInput={clickHandle}
             />
             <SearchLocationButton onClick={clickHandle} backgroundImage={search} />
         </SearchLocationWrapper>
