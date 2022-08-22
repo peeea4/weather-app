@@ -21,13 +21,17 @@ export const fetchWeatherFromApiStorm = ({ latitude, longitude }) => axios.get(
         },
     },
 );
-
 export function* fetchWeatherWorker({ payload: coords }) {
     yield put(setLoaderStatusAction(true));
     const { data } = yield call(fetchWeatherFromApi, coords);
     yield put(setWeather({ cityName: data?.city?.name, data }));
-    const dataStorm = yield call(fetchWeatherFromApiStorm, coords);
-    yield put(setWeatherStorm({ cityName: data?.city?.name, data: dataStorm.data }));
+    try {
+        const dataStorm = yield call(fetchWeatherFromApiStorm, coords);
+        yield put(setWeatherStorm({ cityName: data?.city?.name, data: dataStorm.data }));
+    } catch (error) {
+        alert("Try to use Open Weather Api");
+        yield put(setLoaderStatusAction(false));
+    }
     yield put(setCurrentLocation(data?.city?.name));
     yield put(setLoaderStatusAction(false));
 }
