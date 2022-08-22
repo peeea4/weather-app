@@ -24,7 +24,7 @@ export const fetchCoordsFromApi = async (cityName) => {
 export function* fetchLocationWorker({ payload: cityName }) {
     yield put(setLoaderStatusAction(true));
     const res = yield call(fetchCoordsFromApi, cityName);
-    if (!res.data.status) {
+    if (res.data.length) {
         const { data } = yield call(fetchWeatherFromApi, {
             latitude: res.data[0].lat,
             longitude: res.data[0].lon,
@@ -41,6 +41,7 @@ export function* fetchLocationWorker({ payload: cityName }) {
         yield put(setLoaderStatusAction(false));
     } else {
         yield put(setCurrentLocation("Nothing found"));
+        yield put(setLoaderStatusAction(false));
     }
 }
 
