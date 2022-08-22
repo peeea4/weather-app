@@ -29,7 +29,7 @@ export function* fetchLocationWorker({ payload: cityName }) {
             });
             yield put(setWeatherStorm({ cityName, dataStorm }));
         } catch (error) {
-            alert(error);
+            console.log(error);
         } finally {
             yield put(setCurrentLocation(cityName));
             yield delay(700);
