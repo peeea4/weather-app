@@ -12,7 +12,6 @@ export const WeeklyForecast = () => {
     const weatherFromStormGlass = useSelector(
         (state) => state.weatherState.weatherFromStormGlass[currentLocation]?.hours,
     );
-    console.log(weatherFromStormGlass);
     const currentAPI = useSelector((state) => state.apiState.currentAPI);
 
     const currentDate = new Date();
