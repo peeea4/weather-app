@@ -26,7 +26,7 @@ export const TodayForecast = () => {
         (state) => state?.weatherState?.weather[currentLocation]?.list,
     )?.slice(0, 1)[0];
     const weatherFromStormGlass = useSelector(
-        (state) => state.weatherState.weatherFromStormGlass[currentLocation].hours,
+        (state) => state.weatherState.weatherFromStormGlass[currentLocation]?.hours,
     )
         ?.filter(
             (day) => new Date(day.time).getDate() === new Date().getDate()
