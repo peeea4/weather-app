@@ -41,6 +41,7 @@ export function* fetchWeatherWorker({ payload: coords }) {
         yield put(setCurrentLocation(data?.city?.name));
     } else {
         yield put(setLoaderStatusAction(false));
+        yield put(setCurrentLocation(data?.city?.name));
     }
 }
 
